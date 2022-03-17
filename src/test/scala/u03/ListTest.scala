@@ -37,7 +37,6 @@ class ListTest:
     assertEquals(Cons (11, Cons(12, Cons(21, Cons(22, Cons(31, Cons(32, Nil())))))), flatMap(l) (v => Cons(v + 1, Cons(v + 2, Nil()))))
 
   @Test def testMax() =
-    //assertEquals(Option.Some(25), max(Cons (10, Cons(25, Cons (20, Nil ())))))
     assertEquals(Option.Some(25), max(Cons(10,Cons(25, Cons(20, Nil())))))
 
   @Test def testGetTeacherCourses() =

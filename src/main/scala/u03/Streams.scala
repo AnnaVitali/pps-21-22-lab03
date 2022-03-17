@@ -37,7 +37,16 @@ object Streams extends App:
     def iterate[A](init: => A)(next: A => A): Stream[A] =
       cons(init, iterate(next(init))(next))
 
-  // TODO: def drop(....)
+    def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
+      case (Cons(head, tail), n) if n > 0 => drop(tail())(n-1)
+      case (Cons(head, tail), n) => Cons(head, tail)
+
+    def constant[A](elem: A): Stream[A] =
+      iterate(elem)(e => e)
+
+    def fibonacci(): Stream[Int] =
+      map(cons(Tuple2(0,0),iterate(Tuple2(0,1))((f,s) => Tuple2(s, f + s))))(e => e._2)
+
   end Stream
 
   // var simplifies chaining of functions a bit..
